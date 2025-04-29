@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { FormSection } from '@/components';
 import { Speech } from './SpeechesSection';
@@ -39,7 +40,7 @@ const GenerateMinutesSection = ({
   const [copied, setCopied] = useState<boolean>(false);
   const { toast } = useToast();
 
-  // Format time from 24h to 12h with am/pm
+  // Format time from 24h to 12h with am/pm - only hours and minutes
   const formatTime = (time24h: string) => {
     if (!time24h) return '';
     const [hours, minutes] = time24h.split(':');
@@ -69,10 +70,16 @@ const GenerateMinutesSection = ({
     minutesContent += `Chairperson: ${chairperson}\n`;
     minutesContent += `Meeting Start Time: ${formattedTime}\n\n`;
     
-    // Attendees
+    // Attendees with guest names
     minutesContent += `Attendees:\n`;
     minutesContent += `Toastmaster Members: ${selectedMembers.length}\n`;
-    minutesContent += `Honorable Guests: ${guests.length}\n\n`;
+    
+    // Display guest count and list guest names
+    if (guests.length > 0) {
+      minutesContent += `Honorable Guests: ${guests.length} (${guests.join(', ')})\n\n`;
+    } else {
+      minutesContent += `Honorable Guests: ${guests.length}\n\n`;
+    }
     
     // Roles in the requested order
     minutesContent += `Roles & Responsibilities:\n`;

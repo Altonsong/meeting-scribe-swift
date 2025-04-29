@@ -52,6 +52,7 @@ const MeetingBasicInfo = ({
             type="time"
             className="form-input"
             value={startTime}
+            step="60" // Set step to 60 seconds to hide seconds input
             onChange={(e) => setStartTime(e.target.value)}
           />
         </div>
