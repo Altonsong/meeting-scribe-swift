@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { FormSection } from '@/components';
 import { Speech } from './SpeechesSection';
@@ -83,7 +82,7 @@ const GenerateMinutesSection = ({
     // Roles in the requested order
     minutesContent += `Roles & Responsibilities:\n`;
     
-    // Display roles in specified order
+    // Display roles in specified order with Joke Master between Timer and Quiz Master
     const orderedRoles = [
       "General Evaluator",
       "Table Topics Master",
@@ -102,11 +101,7 @@ const GenerateMinutesSection = ({
     // Word of the week
     const grammarian = roleAssignments["Grammarian"] || "";
     minutesContent += `\nWord of the Week: ${wordOfWeek}\n`;
-    minutesContent += `Presented by: ${grammarian}\n`;
-    
-    // Joke
-    minutesContent += `\nJoke of the Week:\n`;
-    minutesContent += `Presented by: ${jokePresenter}\n\n`;
+    minutesContent += `Presented by: ${grammarian}\n\n`;
     
     // Grammarian's Report in the requested order
     minutesContent += `Grammarian's Report:\n`;
