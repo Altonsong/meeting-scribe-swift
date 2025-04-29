@@ -44,10 +44,28 @@ const RolesSection = ({
     });
   };
 
+  // Reorder roles in preferred order
+  const orderedRoles = [
+    "General Evaluator",
+    "Table Topics Master",
+    "Grammarian",
+    "Timer",
+    "Joke Master",
+    "Quiz Master"
+  ];
+
+  // Filter roles to match the ordered roles
+  const displayRoles = roles.filter(role => orderedRoles.includes(role));
+  
+  // Sort the display roles according to the ordered roles
+  displayRoles.sort((a, b) => {
+    return orderedRoles.indexOf(a) - orderedRoles.indexOf(b);
+  });
+
   return (
     <FormSection title="Roles & Responsibilities">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {roles.map((role) => (
+        {displayRoles.map((role) => (
           <div key={role} className="form-group">
             <label htmlFor={`role-${role}`} className="form-label">{role}</label>
             <select
@@ -76,23 +94,6 @@ const RolesSection = ({
             value={wordOfWeek}
             onChange={(e) => setWordOfWeek(e.target.value)}
           />
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="joke-presenter" className="form-label">Joke Master</label>
-          <select
-            id="joke-presenter"
-            className="form-input"
-            value={jokePresenter}
-            onChange={(e) => setJokePresenter(e.target.value)}
-          >
-            <option value="">Select Joke Master</option>
-            {members.map((member) => (
-              <option key={member.id} value={member.name}>
-                {member.name}
-              </option>
-            ))}
-          </select>
         </div>
         
         <div className="form-group">

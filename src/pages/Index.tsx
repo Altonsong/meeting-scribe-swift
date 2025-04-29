@@ -35,6 +35,12 @@ const Index = () => {
   
   // Awards
   const [awardRecipients, setAwardRecipients] = useState<Record<string, string[]>>({});
+
+  // Add "Group Evaluation" to members list for speech evaluators
+  const membersWithGroupEval = [
+    ...members,
+    { id: "group-eval", name: "Group Evaluation", role: "Group", joined: "" }
+  ];
   
   return (
     <div className="min-h-screen bg-gray-50 py-6 px-4">
@@ -82,7 +88,7 @@ const Index = () => {
         <SpeechesSection 
           speeches={speeches}
           setSpeeches={setSpeeches}
-          members={members}
+          members={membersWithGroupEval}
         />
         
         <AwardsSection 
@@ -102,7 +108,6 @@ const Index = () => {
           guests={guests}
           roleAssignments={roleAssignments}
           wordOfWeek={wordOfWeek}
-          wordPresenter=""
           jokePresenter={jokePresenter}
           wordUsageCount={wordUsageCount}
           fillerWordsCount={fillerWordsCount}

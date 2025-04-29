@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { FormSection } from '@/components';
 import { Speech } from './SpeechesSection';
@@ -14,7 +13,6 @@ interface GenerateMinutesSectionProps {
   guests: string[];
   roleAssignments: Record<string, string>;
   wordOfWeek: string;
-  wordPresenter: string;
   jokePresenter: string;
   wordUsageCount: number;
   fillerWordsCount: number;
@@ -76,23 +74,37 @@ const GenerateMinutesSection = ({
     minutesContent += `Toastmaster Members: ${selectedMembers.length}\n`;
     minutesContent += `Honorable Guests: ${guests.length}\n\n`;
     
-    // Roles
+    // Roles in the requested order
     minutesContent += `Roles & Responsibilities:\n`;
-    Object.entries(roleAssignments).forEach(([role, person]) => {
-      minutesContent += `${role}: ${person}\n`;
+    
+    // Display roles in specified order
+    const orderedRoles = [
+      "General Evaluator",
+      "Table Topics Master",
+      "Grammarian",
+      "Timer",
+      "Joke Master",
+      "Quiz Master"
+    ];
+
+    orderedRoles.forEach(role => {
+      if (roleAssignments[role]) {
+        minutesContent += `${role}: ${roleAssignments[role]}\n`;
+      }
     });
     
     // Word of the week
     const grammarian = roleAssignments["Grammarian"] || "";
-    minutesContent += `Word of the Week: ${wordOfWeek}\n`;
+    minutesContent += `\nWord of the Week: ${wordOfWeek}\n`;
     minutesContent += `Presented by: ${grammarian}\n`;
     
     // Joke
-    minutesContent += `Joke of the Week:\n`;
+    minutesContent += `\nJoke of the Week:\n`;
     minutesContent += `Presented by: ${jokePresenter}\n\n`;
     
-    // Grammarian's Report
+    // Grammarian's Report in the requested order
     minutesContent += `Grammarian's Report:\n`;
+    minutesContent += `Word of the Week: ${wordOfWeek}\n`;
     minutesContent += `Word of the Week Usage: ${wordUsageCount} times\n`;
     minutesContent += `Filler Words Used: ${fillerWordsCount} times\n\n`;
     
