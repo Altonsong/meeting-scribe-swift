@@ -120,8 +120,8 @@ const GenerateMinutesSection = ({
     
     // Word of the week
     const grammarian = roleAssignments["Grammarian"] || "";
-    minutesContent += `\nWord of the Week: ${wordOfWeek}\n`;
-    minutesContent += `Presented by: ${grammarian}\n\n`;
+    //minutesContent += `\nWord of the Week: ${wordOfWeek}\n`;
+    //minutesContent += `Presented by: ${grammarian}\n\n`;
     
     // Grammarian's Report in the requested order
     minutesContent += `Grammarian's Report:\n`;
