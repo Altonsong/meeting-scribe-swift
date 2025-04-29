@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { FormSection } from '@/components';
 import { Speech } from './SpeechesSection';
@@ -63,8 +62,7 @@ const GenerateMinutesSection = ({
     let minutesContent = `Minutes of Markham Toastmasters Regular Meeting-${formattedDate}\n\n`;
     
     // Theme
-    minutesContent += `Theme of the Week: "${theme}"\n`;
-    minutesContent += `The theme was ${theme}—a powerful reminder to stay open-minded and embrace new experiences, even if they feel uncomfortable at first\n\n`;
+    minutesContent += `Theme of the Week: "${theme}"\n\n`;
     
     // Basic info
     minutesContent += `Chairperson: ${chairperson}\n`;
