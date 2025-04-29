@@ -33,7 +33,7 @@ const MeetingBasicInfo = ({
 
   return (
     <FormSection title="Meeting Basic Information">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div className="form-group">
           <label htmlFor="meeting-date" className="form-label">Meeting Date</label>
           <input
@@ -57,7 +57,7 @@ const MeetingBasicInfo = ({
           />
         </div>
         
-        <div className="form-group md:col-span-2">
+        <div className="form-group sm:col-span-2">
           <label htmlFor="theme" className="form-label">Theme of the Week</label>
           <input
             id="theme"
@@ -69,7 +69,7 @@ const MeetingBasicInfo = ({
           />
         </div>
         
-        <div className="form-group md:col-span-2">
+        <div className="form-group sm:col-span-2">
           <label htmlFor="chairperson" className="form-label">Chairperson</label>
           <select
             id="chairperson"

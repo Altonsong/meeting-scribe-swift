@@ -46,23 +46,23 @@ const SpeechesSection = ({ speeches, setSpeeches, members }: SpeechesSectionProp
   return (
     <FormSection title="Prepared Speeches">
       {speeches.map((speech, index) => (
-        <div key={speech.id} className="mb-6 p-4 border rounded-md bg-gray-50">
+        <div key={speech.id} className="mb-4 sm:mb-6 p-3 sm:p-4 border rounded-md bg-gray-50">
           <div className="flex justify-between items-center mb-3">
-            <h4 className="font-medium">Speech {index + 1}</h4>
+            <h4 className="font-medium text-sm sm:text-base">Speech {index + 1}</h4>
             <button 
               onClick={() => removeSpeech(speech.id)}
               className="text-red-500 hover:text-red-700"
               aria-label="Remove speech"
             >
-              <Trash size={18} />
+              <Trash size={16} className="sm:h-[18px] sm:w-[18px]" />
             </button>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div className="form-group">
-              <label className="form-label">Speaker</label>
+              <label className="form-label text-sm">Speaker</label>
               <select
-                className="form-input"
+                className="form-input text-sm"
                 value={speech.speaker}
                 onChange={(e) => updateSpeech(speech.id, 'speaker', e.target.value)}
               >
@@ -74,10 +74,10 @@ const SpeechesSection = ({ speeches, setSpeeches, members }: SpeechesSectionProp
             </div>
             
             <div className="form-group">
-              <label className="form-label">Speech Title</label>
+              <label className="form-label text-sm">Speech Title</label>
               <input
                 type="text"
-                className="form-input"
+                className="form-input text-sm"
                 placeholder="Enter speech title"
                 value={speech.title}
                 onChange={(e) => updateSpeech(speech.id, 'title', e.target.value)}
@@ -85,9 +85,9 @@ const SpeechesSection = ({ speeches, setSpeeches, members }: SpeechesSectionProp
             </div>
             
             <div className="form-group">
-              <label className="form-label">Evaluator</label>
+              <label className="form-label text-sm">Evaluator</label>
               <select
-                className="form-input"
+                className="form-input text-sm"
                 value={speech.evaluator}
                 onChange={(e) => updateSpeech(speech.id, 'evaluator', e.target.value)}
               >
@@ -98,12 +98,12 @@ const SpeechesSection = ({ speeches, setSpeeches, members }: SpeechesSectionProp
               </select>
             </div>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <div className="form-group">
-                <label className="form-label">Time Taken</label>
+                <label className="form-label text-sm">Time Taken</label>
                 <input
                   type="text"
-                  className="form-input"
+                  className="form-input text-sm"
                   placeholder="mm:ss"
                   value={speech.timeTaken}
                   onChange={(e) => updateSpeech(speech.id, 'timeTaken', e.target.value)}
@@ -111,10 +111,10 @@ const SpeechesSection = ({ speeches, setSpeeches, members }: SpeechesSectionProp
               </div>
               
               <div className="form-group">
-                <label className="form-label">Evaluation Time</label>
+                <label className="form-label text-sm">Evaluation Time</label>
                 <input
                   type="text"
-                  className="form-input"
+                  className="form-input text-sm"
                   placeholder="mm:ss"
                   value={speech.evaluationTime}
                   onChange={(e) => updateSpeech(speech.id, 'evaluationTime', e.target.value)}
@@ -128,9 +128,9 @@ const SpeechesSection = ({ speeches, setSpeeches, members }: SpeechesSectionProp
       <div className="flex justify-center">
         <button 
           onClick={addSpeech} 
-          className="flex items-center px-4 py-2 bg-primary text-white rounded-md"
+          className="flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-primary text-white rounded-md text-sm"
         >
-          <Plus size={18} className="mr-1" /> Add Speech
+          <Plus size={16} className="mr-1" /> Add Speech
         </button>
       </div>
     </FormSection>

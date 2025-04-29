@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { FormSection } from '@/components';
 import { Speech } from './SpeechesSection';
@@ -184,7 +185,7 @@ const GenerateMinutesSection = ({
       <div className="mb-4">
         <button 
           onClick={generateMinutes}
-          className="w-full py-3 bg-primary text-white rounded-md font-medium hover:bg-primary/90 transition-colors"
+          className="w-full py-2 sm:py-3 bg-primary text-white rounded-md font-medium hover:bg-primary/90 transition-colors text-sm sm:text-base"
         >
           Generate Meeting Minutes
         </button>
@@ -195,23 +196,23 @@ const GenerateMinutesSection = ({
           <div className="flex gap-2 mb-3">
             <button 
               onClick={copyToClipboard}
-              className="flex-1 py-2 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-md flex items-center justify-center gap-1"
+              className="flex-1 py-1.5 sm:py-2 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-md flex items-center justify-center gap-1 text-xs sm:text-sm"
             >
-              {copied ? <Check size={18} /> : null}
+              {copied ? <Check size={16} /> : null}
               Copy to Clipboard
             </button>
             
             <button 
               onClick={downloadMinutes}
-              className="flex-1 py-2 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-md flex items-center justify-center gap-1"
+              className="flex-1 py-1.5 sm:py-2 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-md flex items-center justify-center gap-1 text-xs sm:text-sm"
             >
-              <Download size={18} />
+              <Download size={16} />
               Download as TXT
             </button>
           </div>
           
-          <div className="border rounded-md p-3 bg-gray-50 overflow-auto max-h-96">
-            <pre className="whitespace-pre-wrap text-sm font-mono">{minutesText}</pre>
+          <div className="border rounded-md p-2 sm:p-3 bg-gray-50 overflow-auto max-h-60 sm:max-h-96">
+            <pre className="whitespace-pre-wrap text-xs sm:text-sm font-mono">{minutesText}</pre>
           </div>
         </>
       )}

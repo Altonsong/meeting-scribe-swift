@@ -64,13 +64,13 @@ const RolesSection = ({
 
   return (
     <FormSection title="Roles & Responsibilities">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         {displayRoles.map((role) => (
           <div key={role} className="form-group">
-            <label htmlFor={`role-${role}`} className="form-label">{role}</label>
+            <label htmlFor={`role-${role}`} className="form-label text-sm sm:text-base">{role}</label>
             <select
               id={`role-${role}`}
-              className="form-input"
+              className="form-input text-sm sm:text-base"
               value={roleAssignments[role] || ''}
               onChange={(e) => handleRoleChange(role, e.target.value)}
             >
@@ -85,11 +85,11 @@ const RolesSection = ({
         ))}
         
         <div className="form-group">
-          <label htmlFor="word-of-week" className="form-label">Word of the Week</label>
+          <label htmlFor="word-of-week" className="form-label text-sm sm:text-base">Word of the Week</label>
           <input
             id="word-of-week"
             type="text"
-            className="form-input"
+            className="form-input text-sm sm:text-base"
             placeholder="Enter the word of the week"
             value={wordOfWeek}
             onChange={(e) => setWordOfWeek(e.target.value)}
@@ -97,11 +97,11 @@ const RolesSection = ({
         </div>
         
         <div className="form-group">
-          <label htmlFor="word-usage" className="form-label">Word of the Week Usage Count</label>
+          <label htmlFor="word-usage" className="form-label text-sm sm:text-base">Word of the Week Usage Count</label>
           <input
             id="word-usage"
             type="number"
-            className="form-input"
+            className="form-input text-sm sm:text-base"
             placeholder="How many times was the word used?"
             value={wordUsageCount || ''}
             onChange={(e) => setWordUsageCount(parseInt(e.target.value) || 0)}
@@ -110,11 +110,11 @@ const RolesSection = ({
         </div>
         
         <div className="form-group">
-          <label htmlFor="filler-words" className="form-label">Filler Words Count</label>
+          <label htmlFor="filler-words" className="form-label text-sm sm:text-base">Filler Words Count</label>
           <input
             id="filler-words"
             type="number"
-            className="form-input"
+            className="form-input text-sm sm:text-base"
             placeholder="How many filler words were used?"
             value={fillerWordsCount || ''}
             onChange={(e) => setFillerWordsCount(parseInt(e.target.value) || 0)}

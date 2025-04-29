@@ -43,11 +43,11 @@ const Index = () => {
   ];
   
   return (
-    <div className="min-h-screen bg-gray-50 py-6 px-4">
+    <div className="min-h-screen bg-gray-50 py-4 px-3 sm:py-6 sm:px-4">
       <div className="max-w-4xl mx-auto">
-        <header className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">MTM Meeting Record</h1>
-          <p className="text-gray-600">Generate meeting minutes for Markham Toastmasters Club</p>
+        <header className="text-center mb-6 sm:mb-8">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 sm:mb-2">MTM Meeting Record</h1>
+          <p className="text-gray-600 text-sm sm:text-base">Generate meeting minutes for Markham Toastmasters Club</p>
         </header>
         
         <MeetingBasicInfo 
@@ -115,7 +115,7 @@ const Index = () => {
           awardRecipients={awardRecipients}
         />
         
-        <footer className="mt-8 text-center text-sm text-gray-500">
+        <footer className="mt-6 sm:mt-8 text-center text-xs sm:text-sm text-gray-500">
           <p>© {new Date().getFullYear()} MTM Meeting Record | Design by Lovable</p>
         </footer>
       </div>
