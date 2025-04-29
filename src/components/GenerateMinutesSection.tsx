@@ -68,6 +68,16 @@ const GenerateMinutesSection = ({
     return `${firstName} ${lastInitial}.`;
   };
 
+  // Shuffle array randomly - Fisher-Yates algorithm
+  const shuffleArray = (array: string[]): string[] => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
   const generateMinutes = () => {
     const formattedDate = formatDate(meetingDate);
     const formattedTime = formatTime(startTime);
@@ -84,13 +94,16 @@ const GenerateMinutesSection = ({
     // Format member names
     const formattedMemberNames = selectedMembers.map(member => formatName(member));
     
+    // Shuffle member names to display in random order
+    const shuffledMemberNames = shuffleArray(formattedMemberNames);
+    
     // Format guest names
     const formattedGuestNames = guests.map(guest => formatName(guest));
     
     // Attendees with member names
     minutesContent += `Attendees:\n`;
-    // List all member names in parentheses
-    minutesContent += `Toastmaster Members: ${selectedMembers.length} (${formattedMemberNames.join(', ')})\n`;
+    // List all member names in parentheses in random order
+    minutesContent += `Toastmaster Members: ${selectedMembers.length} (${shuffledMemberNames.join(', ')})\n`;
     
     // Display guest count and list guest names
     if (guests.length > 0) {
