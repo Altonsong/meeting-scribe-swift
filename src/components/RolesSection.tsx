@@ -84,6 +84,26 @@ const RolesSection = ({
           </div>
         ))}
         
+        {/* Include Joke Master field if not already in the roles list */}
+        {!roles.includes("Joke Master") && (
+          <div className="form-group">
+            <label htmlFor="joke-master" className="form-label text-sm sm:text-base">Joke Master</label>
+            <select
+              id="joke-master"
+              className="form-input text-sm sm:text-base"
+              value={jokePresenter}
+              onChange={(e) => setJokePresenter(e.target.value)}
+            >
+              <option value="">Select Joke Master</option>
+              {members.map((member) => (
+                <option key={member.id} value={member.name}>
+                  {member.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+        
         <div className="form-group">
           <label htmlFor="word-of-week" className="form-label text-sm sm:text-base">Word of the Week</label>
           <input

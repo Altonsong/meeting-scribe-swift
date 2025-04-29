@@ -49,7 +49,8 @@ export const roles = [
   "Timer",
   "Quiz Master", 
   "General Evaluator",
-  "Grammarian"
+  "Grammarian",
+  "Joke Master" // Added Joke Master to the roles list
 ];
 
 export const awards = [

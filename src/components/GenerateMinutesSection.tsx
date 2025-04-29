@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { FormSection } from '@/components';
 import { Speech } from './SpeechesSection';
@@ -39,12 +40,13 @@ const GenerateMinutesSection = ({
   const [copied, setCopied] = useState<boolean>(false);
   const { toast } = useToast();
 
-  // Format time from 24h to 12h with am/pm - only hours and minutes
+  // Format time from 24h to 12h with pm - only hours and minutes
   const formatTime = (time24h: string) => {
     if (!time24h) return '';
     const [hours, minutes] = time24h.split(':');
     const hour = parseInt(hours, 10);
-    const ampm = hour >= 12 ? 'p.m.' : 'a.m.';
+    // Always use PM as per requirement
+    const ampm = 'p.m.';
     const hour12 = hour % 12 || 12;
     return `${hour12}:${minutes} ${ampm}`;
   };
@@ -53,6 +55,17 @@ const GenerateMinutesSection = ({
   const formatDate = (dateString: string) => {
     if (!dateString) return '';
     return dateString;
+  };
+
+  // Format name to first name + last name initial
+  const formatName = (fullName: string) => {
+    if (!fullName) return '';
+    const nameParts = fullName.trim().split(' ');
+    if (nameParts.length === 1) return nameParts[0];
+    
+    const firstName = nameParts[0];
+    const lastInitial = nameParts[nameParts.length - 1][0];
+    return `${firstName} ${lastInitial}.`;
   };
 
   const generateMinutes = () => {
@@ -68,13 +81,20 @@ const GenerateMinutesSection = ({
     minutesContent += `Chairperson: ${chairperson}\n`;
     minutesContent += `Meeting Start Time: ${formattedTime}\n\n`;
     
-    // Attendees with guest names
+    // Format member names
+    const formattedMemberNames = selectedMembers.map(member => formatName(member));
+    
+    // Format guest names
+    const formattedGuestNames = guests.map(guest => formatName(guest));
+    
+    // Attendees with member names
     minutesContent += `Attendees:\n`;
-    minutesContent += `Toastmaster Members: ${selectedMembers.length}\n`;
+    // List all member names in parentheses
+    minutesContent += `Toastmaster Members: ${selectedMembers.length} (${formattedMemberNames.join(', ')})\n`;
     
     // Display guest count and list guest names
     if (guests.length > 0) {
-      minutesContent += `Honorable Guests: ${guests.length} (${guests.join(', ')})\n\n`;
+      minutesContent += `Honorable Guests: ${guests.length} (${formattedGuestNames.join(', ')})\n\n`;
     } else {
       minutesContent += `Honorable Guests: ${guests.length}\n\n`;
     }

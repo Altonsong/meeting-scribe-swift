@@ -29,7 +29,15 @@ const MeetingBasicInfo = ({
     const today = new Date();
     const formattedDate = today.toISOString().split('T')[0];
     setMeetingDate(formattedDate);
-  }, [setMeetingDate]);
+    
+    // Set default time to current hour:minute PM
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    // Format to HH:MM 24-hour format for input type="time"
+    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    setStartTime(formattedTime);
+  }, [setMeetingDate, setStartTime]);
 
   return (
     <FormSection title="Meeting Basic Information">
@@ -47,14 +55,17 @@ const MeetingBasicInfo = ({
         
         <div className="form-group">
           <label htmlFor="meeting-time" className="form-label">Meeting Start Time</label>
-          <input
-            id="meeting-time"
-            type="time"
-            className="form-input"
-            value={startTime}
-            step="60" // Set step to 60 seconds to hide seconds input
-            onChange={(e) => setStartTime(e.target.value)}
-          />
+          <div className="flex items-center">
+            <input
+              id="meeting-time"
+              type="time"
+              className="form-input flex-grow"
+              value={startTime}
+              step="60" // Set step to 60 seconds to hide seconds input
+              onChange={(e) => setStartTime(e.target.value)}
+            />
+            <span className="ml-2 text-gray-700">PM</span>
+          </div>
         </div>
         
         <div className="form-group sm:col-span-2">
