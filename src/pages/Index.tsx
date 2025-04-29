@@ -26,7 +26,6 @@ const Index = () => {
   // Roles
   const [roleAssignments, setRoleAssignments] = useState<Record<string, string>>({});
   const [wordOfWeek, setWordOfWeek] = useState<string>('');
-  const [wordPresenter, setWordPresenter] = useState<string>('');
   const [jokePresenter, setJokePresenter] = useState<string>('');
   const [wordUsageCount, setWordUsageCount] = useState<number>(0);
   const [fillerWordsCount, setFillerWordsCount] = useState<number>(0);
@@ -72,8 +71,6 @@ const Index = () => {
           setRoleAssignments={setRoleAssignments}
           wordOfWeek={wordOfWeek}
           setWordOfWeek={setWordOfWeek}
-          wordPresenter={wordPresenter}
-          setWordPresenter={setWordPresenter}
           jokePresenter={jokePresenter}
           setJokePresenter={setJokePresenter}
           wordUsageCount={wordUsageCount}
@@ -105,7 +102,7 @@ const Index = () => {
           guests={guests}
           roleAssignments={roleAssignments}
           wordOfWeek={wordOfWeek}
-          wordPresenter={wordPresenter}
+          wordPresenter=""
           jokePresenter={jokePresenter}
           wordUsageCount={wordUsageCount}
           fillerWordsCount={fillerWordsCount}

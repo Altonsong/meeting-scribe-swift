@@ -31,7 +31,6 @@ const GenerateMinutesSection = ({
   guests,
   roleAssignments,
   wordOfWeek,
-  wordPresenter,
   jokePresenter,
   wordUsageCount,
   fillerWordsCount,
@@ -84,8 +83,9 @@ const GenerateMinutesSection = ({
     });
     
     // Word of the week
+    const grammarian = roleAssignments["Grammarian"] || "";
     minutesContent += `Word of the Week: ${wordOfWeek}\n`;
-    minutesContent += `Presented by: ${wordPresenter}\n`;
+    minutesContent += `Presented by: ${grammarian}\n`;
     
     // Joke
     minutesContent += `Joke of the Week:\n`;

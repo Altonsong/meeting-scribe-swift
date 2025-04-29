@@ -14,8 +14,6 @@ interface RolesSectionProps {
   setRoleAssignments: (assignments: Record<string, string>) => void;
   wordOfWeek: string;
   setWordOfWeek: (word: string) => void;
-  wordPresenter: string;
-  setWordPresenter: (presenter: string) => void;
   jokePresenter: string;
   setJokePresenter: (presenter: string) => void;
   wordUsageCount: number;
@@ -31,8 +29,6 @@ const RolesSection = ({
   setRoleAssignments,
   wordOfWeek,
   setWordOfWeek,
-  wordPresenter,
-  setWordPresenter,
   jokePresenter,
   setJokePresenter,
   wordUsageCount,
@@ -83,31 +79,14 @@ const RolesSection = ({
         </div>
         
         <div className="form-group">
-          <label htmlFor="word-presenter" className="form-label">Word Presenter</label>
-          <select
-            id="word-presenter"
-            className="form-input"
-            value={wordPresenter}
-            onChange={(e) => setWordPresenter(e.target.value)}
-          >
-            <option value="">Select Word Presenter</option>
-            {members.map((member) => (
-              <option key={member.id} value={member.name}>
-                {member.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="joke-presenter" className="form-label">Joke Presenter</label>
+          <label htmlFor="joke-presenter" className="form-label">Joke Master</label>
           <select
             id="joke-presenter"
             className="form-input"
             value={jokePresenter}
             onChange={(e) => setJokePresenter(e.target.value)}
           >
-            <option value="">Select Joke Presenter</option>
+            <option value="">Select Joke Master</option>
             {members.map((member) => (
               <option key={member.id} value={member.name}>
                 {member.name}
