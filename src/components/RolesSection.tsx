@@ -18,6 +18,10 @@ interface RolesSectionProps {
   setWordPresenter: (presenter: string) => void;
   jokePresenter: string;
   setJokePresenter: (presenter: string) => void;
+  wordUsageCount: number;
+  setWordUsageCount: (count: number) => void;
+  fillerWordsCount: number;
+  setFillerWordsCount: (count: number) => void;
 }
 
 const RolesSection = ({
@@ -30,7 +34,11 @@ const RolesSection = ({
   wordPresenter,
   setWordPresenter,
   jokePresenter,
-  setJokePresenter
+  setJokePresenter,
+  wordUsageCount,
+  setWordUsageCount,
+  fillerWordsCount,
+  setFillerWordsCount
 }: RolesSectionProps) => {
   
   const handleRoleChange = (role: string, assignee: string) => {
@@ -91,7 +99,7 @@ const RolesSection = ({
           </select>
         </div>
         
-        <div className="form-group md:col-span-2">
+        <div className="form-group">
           <label htmlFor="joke-presenter" className="form-label">Joke Presenter</label>
           <select
             id="joke-presenter"
@@ -106,6 +114,32 @@ const RolesSection = ({
               </option>
             ))}
           </select>
+        </div>
+        
+        <div className="form-group">
+          <label htmlFor="word-usage" className="form-label">Word of the Week Usage Count</label>
+          <input
+            id="word-usage"
+            type="number"
+            className="form-input"
+            placeholder="How many times was the word used?"
+            value={wordUsageCount || ''}
+            onChange={(e) => setWordUsageCount(parseInt(e.target.value) || 0)}
+            min="0"
+          />
+        </div>
+        
+        <div className="form-group">
+          <label htmlFor="filler-words" className="form-label">Filler Words Count</label>
+          <input
+            id="filler-words"
+            type="number"
+            className="form-input"
+            placeholder="How many filler words were used?"
+            value={fillerWordsCount || ''}
+            onChange={(e) => setFillerWordsCount(parseInt(e.target.value) || 0)}
+            min="0"
+          />
         </div>
       </div>
     </FormSection>

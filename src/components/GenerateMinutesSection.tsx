@@ -16,6 +16,8 @@ interface GenerateMinutesSectionProps {
   wordOfWeek: string;
   wordPresenter: string;
   jokePresenter: string;
+  wordUsageCount: number;
+  fillerWordsCount: number;
   speeches: Speech[];
   awardRecipients: Record<string, string[]>;
 }
@@ -31,6 +33,8 @@ const GenerateMinutesSection = ({
   wordOfWeek,
   wordPresenter,
   jokePresenter,
+  wordUsageCount,
+  fillerWordsCount,
   speeches,
   awardRecipients
 }: GenerateMinutesSectionProps) => {
@@ -86,6 +90,11 @@ const GenerateMinutesSection = ({
     // Joke
     minutesContent += `Joke of the Week:\n`;
     minutesContent += `Presented by: ${jokePresenter}\n\n`;
+    
+    // Grammarian's Report
+    minutesContent += `Grammarian's Report:\n`;
+    minutesContent += `Word of the Week Usage: ${wordUsageCount} times\n`;
+    minutesContent += `Filler Words Used: ${fillerWordsCount} times\n\n`;
     
     // Speeches
     minutesContent += `Prepared Speeches:\n`;

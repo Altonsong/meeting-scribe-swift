@@ -28,6 +28,8 @@ const Index = () => {
   const [wordOfWeek, setWordOfWeek] = useState<string>('');
   const [wordPresenter, setWordPresenter] = useState<string>('');
   const [jokePresenter, setJokePresenter] = useState<string>('');
+  const [wordUsageCount, setWordUsageCount] = useState<number>(0);
+  const [fillerWordsCount, setFillerWordsCount] = useState<number>(0);
   
   // Speeches
   const [speeches, setSpeeches] = useState<Speech[]>([]);
@@ -74,6 +76,10 @@ const Index = () => {
           setWordPresenter={setWordPresenter}
           jokePresenter={jokePresenter}
           setJokePresenter={setJokePresenter}
+          wordUsageCount={wordUsageCount}
+          setWordUsageCount={setWordUsageCount}
+          fillerWordsCount={fillerWordsCount}
+          setFillerWordsCount={setFillerWordsCount}
         />
         
         <SpeechesSection 
@@ -101,6 +107,8 @@ const Index = () => {
           wordOfWeek={wordOfWeek}
           wordPresenter={wordPresenter}
           jokePresenter={jokePresenter}
+          wordUsageCount={wordUsageCount}
+          fillerWordsCount={fillerWordsCount}
           speeches={speeches}
           awardRecipients={awardRecipients}
         />
