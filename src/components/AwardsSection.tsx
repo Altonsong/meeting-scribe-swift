@@ -1,6 +1,13 @@
 
 import { FormSection } from '@/components';
 import { Member } from '@/data/memberData';
+import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuCheckboxItem,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
 
 interface AwardsSectionProps {
   awards: string[];
@@ -42,24 +49,41 @@ const AwardsSection = ({
   return (
     <FormSection title="Awards & Recognitions">
       {awards.map(award => (
-        <div key={award} className="mb-4">
+        <div key={award} className="mb-6">
           <h4 className="text-lg font-medium mb-2">{award}</h4>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-            {allPeople.map((person, index) => (
-              <div key={index} className="flex items-center">
-                <input
-                  type="checkbox"
-                  id={`${award}-${index}`}
+          
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex w-full justify-between items-center px-4 py-2 border rounded-md bg-white hover:bg-gray-50">
+              <span>
+                {awardRecipients[award]?.length 
+                  ? `${awardRecipients[award].length} recipient(s) selected` 
+                  : "Select recipients"}
+              </span>
+              <ChevronDown className="h-4 w-4 opacity-50" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-[240px] max-h-[300px] overflow-y-auto">
+              {allPeople.map((person, index) => (
+                <DropdownMenuCheckboxItem
+                  key={index}
                   checked={(awardRecipients[award] || []).includes(person)}
-                  onChange={() => toggleRecipient(award, person)}
-                  className="mr-2"
-                />
-                <label htmlFor={`${award}-${index}`} className="cursor-pointer">
+                  onCheckedChange={() => toggleRecipient(award, person)}
+                >
                   {person}{guests.includes(person) ? " (Guest)" : ""}
-                </label>
-              </div>
-            ))}
-          </div>
+                </DropdownMenuCheckboxItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          
+          {/* Display selected recipients */}
+          {(awardRecipients[award]?.length > 0) && (
+            <div className="mt-2 flex flex-wrap gap-2">
+              {awardRecipients[award].map((person, idx) => (
+                <div key={idx} className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                  {person}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       ))}
     </FormSection>
