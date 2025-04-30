@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
+import { useAttendance } from '@/context/AttendanceContext';
 
 interface AwardsSectionProps {
   awards: string[];
@@ -24,11 +25,11 @@ const AwardsSection = ({
   awardRecipients,
   setAwardRecipients
 }: AwardsSectionProps) => {
+  const { attendeesList } = useAttendance();
   
-  const allPeople = [
-    ...members.map(member => member.name),
-    ...guests
-  ];
+  const allPeople = attendeesList.length > 0
+    ? attendeesList
+    : [...members.map(member => member.name), ...guests];
   
   const toggleRecipient = (award: string, person: string) => {
     const currentRecipients = awardRecipients[award] || [];

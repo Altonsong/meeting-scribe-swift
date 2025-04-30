@@ -1,6 +1,7 @@
 
 import { FormSection } from '@/components';
 import { Member } from '@/data/memberData';
+import { useAttendance } from '@/context/AttendanceContext';
 
 interface RoleAssignment {
   role: string;
@@ -36,6 +37,7 @@ const RolesSection = ({
   fillerWordsCount,
   setFillerWordsCount
 }: RolesSectionProps) => {
+  const { attendeesList } = useAttendance();
   
   const handleRoleChange = (role: string, assignee: string) => {
     setRoleAssignments({
@@ -62,6 +64,11 @@ const RolesSection = ({
     return orderedRoles.indexOf(a) - orderedRoles.indexOf(b);
   });
 
+  // Get available attendees for role selection
+  const availableAttendees = attendeesList.length > 0 
+    ? attendeesList 
+    : members.map(member => member.name);
+
   return (
     <FormSection title="Roles & Responsibilities">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
@@ -75,9 +82,9 @@ const RolesSection = ({
               onChange={(e) => handleRoleChange(role, e.target.value)}
             >
               <option value="">Select {role}</option>
-              {members.map((member) => (
-                <option key={member.id} value={member.name}>
-                  {member.name}
+              {availableAttendees.map((attendee, index) => (
+                <option key={index} value={attendee}>
+                  {attendee}
                 </option>
               ))}
             </select>
@@ -95,9 +102,9 @@ const RolesSection = ({
               onChange={(e) => setJokePresenter(e.target.value)}
             >
               <option value="">Select Joke Master</option>
-              {members.map((member) => (
-                <option key={member.id} value={member.name}>
-                  {member.name}
+              {availableAttendees.map((attendee, index) => (
+                <option key={index} value={attendee}>
+                  {attendee}
                 </option>
               ))}
             </select>

@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { FormSection } from '@/components';
 import { Speech } from './SpeechesSection';
@@ -68,6 +67,24 @@ const GenerateMinutesSection = ({
     return `${firstName} ${lastInitial}.`;
   };
 
+  // Get last name initial for sorting
+  const getLastNameInitial = (fullName: string): string => {
+    if (!fullName) return '';
+    const nameParts = fullName.trim().split(' ');
+    if (nameParts.length === 1) return '';
+    
+    return nameParts[nameParts.length - 1][0].toUpperCase();
+  };
+
+  // Sort array by last name initial alphabetically
+  const sortByLastName = (array: string[]): string[] => {
+    return [...array].sort((a, b) => {
+      const lastInitialA = getLastNameInitial(a);
+      const lastInitialB = getLastNameInitial(b);
+      return lastInitialA.localeCompare(lastInitialB);
+    });
+  };
+
   // Shuffle array randomly - Fisher-Yates algorithm
   const shuffleArray = (array: string[]): string[] => {
     const shuffled = [...array];
@@ -91,19 +108,19 @@ const GenerateMinutesSection = ({
     minutesContent += `Chairperson: ${chairperson}\n`;
     minutesContent += `Meeting Start Time: ${formattedTime}\n\n`;
     
-    // Format member names
-    const formattedMemberNames = selectedMembers.map(member => formatName(member));
+    // Sort members by last name
+    const sortedMembers = sortByLastName(selectedMembers);
     
-    // Shuffle member names to display in random order
-    const shuffledMemberNames = shuffleArray(formattedMemberNames);
+    // Format member names
+    const formattedMemberNames = sortedMembers.map(member => formatName(member));
     
     // Format guest names
     const formattedGuestNames = guests.map(guest => formatName(guest));
     
     // Attendees with member names
     minutesContent += `Attendees:\n`;
-    // List all member names in parentheses in random order
-    minutesContent += `Toastmaster Members: ${selectedMembers.length} (${shuffledMemberNames.join(', ')})\n`;
+    // List all member names in parentheses sorted by last name
+    minutesContent += `Toastmaster Members: ${selectedMembers.length} (${formattedMemberNames.join(', ')})\n`;
     
     // Display guest count and list guest names
     if (guests.length > 0) {
@@ -133,11 +150,9 @@ const GenerateMinutesSection = ({
     
     // Word of the week
     const grammarian = roleAssignments["Grammarian"] || "";
-    //minutesContent += `\nWord of the Week: ${wordOfWeek}\n`;
-    //minutesContent += `Presented by: ${grammarian}\n\n`;
     
     // Grammarian's Report in the requested order
-    minutesContent += `Grammarian's Report:\n`;
+    minutesContent += `\nGrammarian's Report:\n`;
     minutesContent += `Word of the Week: ${wordOfWeek}\n`;
     minutesContent += `Word of the Week Usage: ${wordUsageCount} times\n`;
     minutesContent += `Filler Words Used: ${fillerWordsCount} times\n\n`;

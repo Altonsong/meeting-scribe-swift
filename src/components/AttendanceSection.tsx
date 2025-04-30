@@ -1,8 +1,9 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FormSection } from '@/components';
 import { Member } from '@/data/memberData';
 import { X, Plus } from 'lucide-react';
+import { useAttendance } from '@/context/AttendanceContext';
 
 interface AttendanceSectionProps {
   members: Member[];
@@ -20,6 +21,12 @@ const AttendanceSection = ({
   setGuests
 }: AttendanceSectionProps) => {
   const [newGuest, setNewGuest] = useState('');
+  const { updateAttendeesList } = useAttendance();
+  
+  useEffect(() => {
+    // Update the attendees list whenever selected members or guests change
+    updateAttendeesList(selectedMembers, guests);
+  }, [selectedMembers, guests, updateAttendeesList]);
 
   const handleMemberToggle = (memberName: string) => {
     if (selectedMembers.includes(memberName)) {

@@ -1,7 +1,8 @@
-
 import { FormSection } from '@/components';
 import { Member } from '@/data/memberData';
 import { Plus, Trash } from 'lucide-react';
+import { useAttendance } from '@/context/AttendanceContext';
+import { useState, useEffect } from 'react';
 
 export interface Speech {
   id: number;
@@ -19,6 +20,27 @@ interface SpeechesSectionProps {
 }
 
 const SpeechesSection = ({ speeches, setSpeeches, members }: SpeechesSectionProps) => {
+  const { attendeesList } = useAttendance();
+  
+  const formatTimeInput = (value: string): string => {
+    // Remove non-numeric characters
+    const numericValue = value.replace(/\D/g, '');
+    
+    // Format as mm:ss
+    if (numericValue.length <= 2) {
+      return numericValue;
+    } else if (numericValue.length <= 4) {
+      const minutes = numericValue.slice(0, 2);
+      const seconds = numericValue.slice(2);
+      return `${minutes}:${seconds}`;
+    } else {
+      // If more than 4 digits, only keep the first 4
+      const minutes = numericValue.slice(0, 2);
+      const seconds = numericValue.slice(2, 4);
+      return `${minutes}:${seconds}`;
+    }
+  };
+
   const addSpeech = () => {
     const newSpeech: Speech = {
       id: speeches.length ? Math.max(...speeches.map(s => s.id)) + 1 : 1,
@@ -36,12 +58,28 @@ const SpeechesSection = ({ speeches, setSpeeches, members }: SpeechesSectionProp
   };
 
   const updateSpeech = (id: number, field: keyof Speech, value: string) => {
+    // If the field is time-related, format the input
+    if (field === 'timeTaken' || field === 'evaluationTime') {
+      value = formatTimeInput(value);
+    }
+    
     setSpeeches(
       speeches.map(speech => 
         speech.id === id ? { ...speech, [field]: value } : speech
       )
     );
   };
+
+  // Get available attendees for speech roles
+  const availableSpeakers = attendeesList.length > 0 
+    ? [...attendeesList] 
+    : members.map(member => member.name);
+    
+  // Include "Group Evaluation" option for evaluators
+  const availableEvaluators = [
+    ...availableSpeakers,
+    ...(availableSpeakers.includes("Group Evaluation") ? [] : ["Group Evaluation"])
+  ];
 
   return (
     <FormSection title="Prepared Speeches">
@@ -67,8 +105,8 @@ const SpeechesSection = ({ speeches, setSpeeches, members }: SpeechesSectionProp
                 onChange={(e) => updateSpeech(speech.id, 'speaker', e.target.value)}
               >
                 <option value="">Select Speaker</option>
-                {members.map(member => (
-                  <option key={member.id} value={member.name}>{member.name}</option>
+                {availableSpeakers.map((speaker, index) => (
+                  <option key={index} value={speaker}>{speaker}</option>
                 ))}
               </select>
             </div>
@@ -92,8 +130,8 @@ const SpeechesSection = ({ speeches, setSpeeches, members }: SpeechesSectionProp
                 onChange={(e) => updateSpeech(speech.id, 'evaluator', e.target.value)}
               >
                 <option value="">Select Evaluator</option>
-                {members.map(member => (
-                  <option key={member.id} value={member.name}>{member.name}</option>
+                {availableEvaluators.map((evaluator, index) => (
+                  <option key={index} value={evaluator}>{evaluator}</option>
                 ))}
               </select>
             </div>
@@ -104,9 +142,10 @@ const SpeechesSection = ({ speeches, setSpeeches, members }: SpeechesSectionProp
                 <input
                   type="text"
                   className="form-input text-sm"
-                  placeholder="mm:ss"
+                  placeholder="Input 4 digits (e.g. 0520)"
                   value={speech.timeTaken}
                   onChange={(e) => updateSpeech(speech.id, 'timeTaken', e.target.value)}
+                  maxLength={5}
                 />
               </div>
               
@@ -115,9 +154,10 @@ const SpeechesSection = ({ speeches, setSpeeches, members }: SpeechesSectionProp
                 <input
                   type="text"
                   className="form-input text-sm"
-                  placeholder="mm:ss"
+                  placeholder="Input 4 digits (e.g. 0230)"
                   value={speech.evaluationTime}
                   onChange={(e) => updateSpeech(speech.id, 'evaluationTime', e.target.value)}
+                  maxLength={5}
                 />
               </div>
             </div>

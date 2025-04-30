@@ -11,6 +11,7 @@ import {
 } from '@/components';
 import { members, roles, awards } from '@/data/memberData';
 import type { Speech } from '@/components/SpeechesSection';
+import { AttendanceProvider } from '@/context/AttendanceContext';
 
 const Index = () => {
   // Meeting Basic Info
@@ -43,83 +44,85 @@ const Index = () => {
   ];
   
   return (
-    <div className="min-h-screen bg-gray-50 py-4 px-3 sm:py-6 sm:px-4">
-      <div className="max-w-4xl mx-auto">
-        <header className="text-center mb-6 sm:mb-8">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 sm:mb-2">MTM Meeting Record</h1>
-          <p className="text-gray-600 text-sm sm:text-base">Generate meeting minutes for Markham Toastmasters Club</p>
-        </header>
-        
-        <MeetingBasicInfo 
-          meetingDate={meetingDate}
-          setMeetingDate={setMeetingDate}
-          theme={theme}
-          setTheme={setTheme}
-          startTime={startTime}
-          setStartTime={setStartTime}
-          chairperson={chairperson}
-          setChairperson={setChairperson}
-          members={members}
-        />
-        
-        <AttendanceSection 
-          members={members}
-          selectedMembers={selectedMembers}
-          setSelectedMembers={setSelectedMembers}
-          guests={guests}
-          setGuests={setGuests}
-        />
-        
-        <RolesSection 
-          members={members}
-          roles={roles}
-          roleAssignments={roleAssignments}
-          setRoleAssignments={setRoleAssignments}
-          wordOfWeek={wordOfWeek}
-          setWordOfWeek={setWordOfWeek}
-          jokePresenter={jokePresenter}
-          setJokePresenter={setJokePresenter}
-          wordUsageCount={wordUsageCount}
-          setWordUsageCount={setWordUsageCount}
-          fillerWordsCount={fillerWordsCount}
-          setFillerWordsCount={setFillerWordsCount}
-        />
-        
-        <SpeechesSection 
-          speeches={speeches}
-          setSpeeches={setSpeeches}
-          members={membersWithGroupEval}
-        />
-        
-        <AwardsSection 
-          awards={awards}
-          members={members}
-          guests={guests}
-          awardRecipients={awardRecipients}
-          setAwardRecipients={setAwardRecipients}
-        />
-        
-        <GenerateMinutesSection 
-          meetingDate={meetingDate}
-          theme={theme}
-          startTime={startTime}
-          chairperson={chairperson}
-          selectedMembers={selectedMembers}
-          guests={guests}
-          roleAssignments={roleAssignments}
-          wordOfWeek={wordOfWeek}
-          jokePresenter={jokePresenter}
-          wordUsageCount={wordUsageCount}
-          fillerWordsCount={fillerWordsCount}
-          speeches={speeches}
-          awardRecipients={awardRecipients}
-        />
-        
-        <footer className="mt-6 sm:mt-8 text-center text-xs sm:text-sm text-gray-500">
-          <p>© {new Date().getFullYear()} MTM Meeting Record | Design by Lovable</p>
-        </footer>
+    <AttendanceProvider>
+      <div className="min-h-screen bg-gray-50 py-4 px-3 sm:py-6 sm:px-4">
+        <div className="max-w-4xl mx-auto">
+          <header className="text-center mb-6 sm:mb-8">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 sm:mb-2">MTM Meeting Record</h1>
+            <p className="text-gray-600 text-sm sm:text-base">Generate meeting minutes for Markham Toastmasters Club</p>
+          </header>
+          
+          <MeetingBasicInfo 
+            meetingDate={meetingDate}
+            setMeetingDate={setMeetingDate}
+            theme={theme}
+            setTheme={setTheme}
+            startTime={startTime}
+            setStartTime={setStartTime}
+            chairperson={chairperson}
+            setChairperson={setChairperson}
+            members={members}
+          />
+          
+          <AttendanceSection 
+            members={members}
+            selectedMembers={selectedMembers}
+            setSelectedMembers={setSelectedMembers}
+            guests={guests}
+            setGuests={setGuests}
+          />
+          
+          <RolesSection 
+            members={members}
+            roles={roles}
+            roleAssignments={roleAssignments}
+            setRoleAssignments={setRoleAssignments}
+            wordOfWeek={wordOfWeek}
+            setWordOfWeek={setWordOfWeek}
+            jokePresenter={jokePresenter}
+            setJokePresenter={setJokePresenter}
+            wordUsageCount={wordUsageCount}
+            setWordUsageCount={setWordUsageCount}
+            fillerWordsCount={fillerWordsCount}
+            setFillerWordsCount={setFillerWordsCount}
+          />
+          
+          <SpeechesSection 
+            speeches={speeches}
+            setSpeeches={setSpeeches}
+            members={membersWithGroupEval}
+          />
+          
+          <AwardsSection 
+            awards={awards}
+            members={members}
+            guests={guests}
+            awardRecipients={awardRecipients}
+            setAwardRecipients={setAwardRecipients}
+          />
+          
+          <GenerateMinutesSection 
+            meetingDate={meetingDate}
+            theme={theme}
+            startTime={startTime}
+            chairperson={chairperson}
+            selectedMembers={selectedMembers}
+            guests={guests}
+            roleAssignments={roleAssignments}
+            wordOfWeek={wordOfWeek}
+            jokePresenter={jokePresenter}
+            wordUsageCount={wordUsageCount}
+            fillerWordsCount={fillerWordsCount}
+            speeches={speeches}
+            awardRecipients={awardRecipients}
+          />
+          
+          <footer className="mt-6 sm:mt-8 text-center text-xs sm:text-sm text-gray-500">
+            <p>© {new Date().getFullYear()} MTM Meeting Record | Design by Lovable</p>
+          </footer>
+        </div>
       </div>
-    </div>
+    </AttendanceProvider>
   );
 };
 
