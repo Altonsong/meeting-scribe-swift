@@ -26,7 +26,7 @@ const AttendanceSection = ({
   useEffect(() => {
     // Update the attendees list whenever selected members or guests change
     updateAttendeesList(selectedMembers, guests);
-  }, [selectedMembers, guests, updateAttendeesList]);
+  }, [selectedMembers, guests]); // Remove updateAttendeesList from dependencies
 
   const handleMemberToggle = (memberName: string) => {
     if (selectedMembers.includes(memberName)) {
