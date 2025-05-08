@@ -1,5 +1,4 @@
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { FormSection } from '@/components';
 import { Member } from '@/data/memberData';
 import { X, Plus } from 'lucide-react';
@@ -22,11 +21,11 @@ const AttendanceSection = ({
 }: AttendanceSectionProps) => {
   const [newGuest, setNewGuest] = useState('');
   const { updateAttendeesList } = useAttendance();
-  
+
   useEffect(() => {
     // Update the attendees list whenever selected members or guests change
     updateAttendeesList(selectedMembers, guests);
-  }, [selectedMembers, guests]); // Remove updateAttendeesList from dependencies
+  }, [selectedMembers, guests, updateAttendeesList]); //Fixed: updateAttendeesList added to dependencies
 
   const handleMemberToggle = (memberName: string) => {
     if (selectedMembers.includes(memberName)) {
@@ -69,7 +68,7 @@ const AttendanceSection = ({
             ))}
           </div>
         </div>
-        
+
         <div>
           <h4 className="text-base sm:text-lg font-medium mb-2">Guests ({guests.length})</h4>
           <div className="flex mb-2">
@@ -88,7 +87,7 @@ const AttendanceSection = ({
               <Plus size={18} />
             </button>
           </div>
-          
+
           <div className="max-h-40 overflow-y-auto border rounded-md p-2">
             {guests.map((guest, index) => (
               <div key={index} className="flex justify-between items-center mb-2 p-1.5 sm:p-2 bg-gray-50 rounded">
