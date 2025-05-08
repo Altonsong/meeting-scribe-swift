@@ -1,4 +1,3 @@
-
 export interface Member {
   id: string;
   name: string;
@@ -41,20 +40,20 @@ export const members: Member[] = [
   { id: "34", name: "Jason Martini" },
   { id: "35", name: "Waseem Abou-Ezze" },
   { id: "36", name: "Justin Gopaul" },
-  { id: "37", name: "Yazhi Zheng" }
+  { id: "37", name: "Yazhi Zheng" },
 ];
 
 export const roles = [
   "Table Topics Master",
   "Timer",
-  "Quiz Master", 
+  "Quiz Master",
   "General Evaluator",
   "Grammarian",
-  "Joke Master" // Added Joke Master to the roles list
+  "Joke Master",
 ];
 
 export const awards = [
   "Spark Plug Award",
   "Smile Award",
-  "Best Table Topics Speaker"
+  "Best Table Topics Speaker",
 ];
