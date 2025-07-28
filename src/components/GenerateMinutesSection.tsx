@@ -179,11 +179,7 @@ const GenerateMinutesSection = ({
     minutesContent += `Awards & Recognitions:\n`;
     Object.entries(awardRecipients).forEach(([award, recipients]) => {
       if (recipients.length > 0) {
-        const emoji = award.includes('Spark') ? '🏆' : 
-                      award.includes('Smile') ? '😊' : 
-                      award.includes('Table Topics') ? '🎤' : '';
-        
-        minutesContent += `${emoji} ${award}: ${recipients.join(' & ')}\n`;
+        minutesContent += `${award}: ${recipients.join(' & ')}\n`;
       }
     });
     
