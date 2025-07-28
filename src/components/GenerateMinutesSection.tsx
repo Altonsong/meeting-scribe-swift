@@ -172,7 +172,7 @@ const GenerateMinutesSection = ({
     
     // Business Session
     if (businessSession.trim()) {
-      minutesContent += `Business Session:\n${businessSession.trim()}\n\n`;
+      minutesContent += `\nBusiness Session:\n${businessSession.trim()}\n\n`;
     }
     
     // Awards
