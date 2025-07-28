@@ -5,6 +5,7 @@ import {
   AttendanceSection,
   RolesSection,
   SpeechesSection,
+  BusinessSessionSection,
   AwardsSection,
   GenerateMinutesSection,
 } from "@/components";
@@ -34,6 +35,9 @@ const Index = () => {
 
   // Speeches
   const [speeches, setSpeeches] = useState<Speech[]>([]);
+
+  // Business Session
+  const [businessSession, setBusinessSession] = useState<string>("");
 
   // Awards
   const [awardRecipients, setAwardRecipients] = useState<
@@ -100,6 +104,11 @@ const Index = () => {
             members={membersWithGroupEval}
           />
 
+          <BusinessSessionSection
+            businessSession={businessSession}
+            setBusinessSession={setBusinessSession}
+          />
+
           <AwardsSection
             awards={awards}
             members={members}
@@ -121,6 +130,7 @@ const Index = () => {
             wordUsageCount={wordUsageCount}
             fillerWordsCount={fillerWordsCount}
             speeches={speeches}
+            businessSession={businessSession}
             awardRecipients={awardRecipients}
           />
 

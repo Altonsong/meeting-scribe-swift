@@ -17,6 +17,7 @@ interface GenerateMinutesSectionProps {
   wordUsageCount: number;
   fillerWordsCount: number;
   speeches: Speech[];
+  businessSession: string;
   awardRecipients: Record<string, string[]>;
 }
 
@@ -33,6 +34,7 @@ const GenerateMinutesSection = ({
   wordUsageCount,
   fillerWordsCount,
   speeches,
+  businessSession,
   awardRecipients
 }: GenerateMinutesSectionProps) => {
   const [minutesText, setMinutesText] = useState<string>('');
@@ -167,6 +169,11 @@ const GenerateMinutesSection = ({
       minutesContent += `Time Taken: ${speech.timeTaken}\n`;
       minutesContent += `Evaluation Time: ${speech.evaluationTime}\n\n`;
     });
+    
+    // Business Session
+    if (businessSession.trim()) {
+      minutesContent += `Business Session:\n${businessSession.trim()}\n\n`;
+    }
     
     // Awards
     minutesContent += `Awards & Recognitions:\n`;
