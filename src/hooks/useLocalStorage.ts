@@ -33,9 +33,10 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T)
     }
   };
 
-  useEffect(() => {
-    setStoredValue(readValue());
-  }, []);
+  // Remove the duplicate initial read - we already read in useState
+  // useEffect(() => {
+  //   setStoredValue(readValue());
+  // }, []);
 
   useEffect(() => {
     const handleStorageChange = () => {
