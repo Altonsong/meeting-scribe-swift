@@ -8,12 +8,15 @@ import {
   BusinessSessionSection,
   AwardsSection,
   GenerateMinutesSection,
+  MemberManagement,
 } from "@/components";
-import { members, roles, awards } from "@/data/memberData";
 import type { Speech } from "@/components/SpeechesSection";
 import { AttendanceProvider } from "@/context/AttendanceContext";
+import { MemberDataProvider, useMemberData } from "@/context/MemberDataContext";
 
-const Index = () => {
+const IndexContent = () => {
+  const { members, roles, awards } = useMemberData();
+
   // Meeting Basic Info
   const [meetingDate, setMeetingDate] = useState<string>("");
   const [theme, setTheme] = useState<string>("");
@@ -51,7 +54,6 @@ const Index = () => {
   ];
 
   return (
-    <AttendanceProvider>
       <div className="min-h-screen bg-gray-50 py-4 px-3 sm:py-6 sm:px-4">
         <div className="max-w-4xl mx-auto">
           <header className="text-center mb-6 sm:mb-8">
@@ -141,8 +143,18 @@ const Index = () => {
             </p>
           </footer>
         </div>
+        <MemberManagement />
       </div>
-    </AttendanceProvider>
+  );
+};
+
+const Index = () => {
+  return (
+    <MemberDataProvider>
+      <AttendanceProvider>
+        <IndexContent />
+      </AttendanceProvider>
+    </MemberDataProvider>
   );
 };
 

@@ -7,3 +7,4 @@ export { default as SpeechesSection } from './SpeechesSection';
 export { default as BusinessSessionSection } from './BusinessSessionSection';
 export { default as AwardsSection } from './AwardsSection';
 export { default as GenerateMinutesSection } from './GenerateMinutesSection';
+export { default as MemberManagement } from './MemberManagement';
