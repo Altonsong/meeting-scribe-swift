@@ -15,7 +15,7 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Settings, X, Plus, Download, Upload, RotateCcw } from 'lucide-react';
+import { Users, X, Plus, Download, Upload, RotateCcw } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import type { Member } from '@/data/memberData';
 
@@ -172,7 +172,7 @@ const MemberManagement = () => {
           variant="outline" 
           className="fixed bottom-6 right-6 rounded-full w-14 h-14 shadow-lg z-50"
         >
-          <Settings className="h-6 w-6" />
+          <Users className="h-6 w-6" />
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
@@ -184,11 +184,10 @@ const MemberManagement = () => {
         </DialogHeader>
 
         <Tabs defaultValue="members" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="members">Members</TabsTrigger>
             <TabsTrigger value="roles">Roles</TabsTrigger>
             <TabsTrigger value="awards">Awards</TabsTrigger>
-            <TabsTrigger value="import-export">Import/Export</TabsTrigger>
           </TabsList>
 
           {/* Members Tab */}
@@ -293,44 +292,7 @@ const MemberManagement = () => {
             <p className="text-sm text-gray-500">Total awards: {editingAwards.length}</p>
           </TabsContent>
 
-          {/* Import/Export Tab */}
-          <TabsContent value="import-export" className="space-y-4">
-            <div className="space-y-4">
-              <div>
-                <Label>Export Data</Label>
-                <p className="text-sm text-gray-500 mb-2">Download your data as a JSON file</p>
-                <Button onClick={handleExport} className="w-full">
-                  <Download className="h-4 w-4 mr-2" />
-                  Export Data
-                </Button>
-              </div>
-              
-              <div>
-                <Label>Import Data</Label>
-                <p className="text-sm text-gray-500 mb-2">Paste JSON data to import</p>
-                <Textarea
-                  placeholder="Paste your JSON data here..."
-                  value={importText}
-                  onChange={(e) => setImportText(e.target.value)}
-                  rows={10}
-                  className="font-mono text-sm"
-                />
-                <Button onClick={handleImport} className="w-full mt-2">
-                  <Upload className="h-4 w-4 mr-2" />
-                  Import Data
-                </Button>
-              </div>
-
-              <div>
-                <Label>Reset to Defaults</Label>
-                <p className="text-sm text-gray-500 mb-2">Reset all data to default values</p>
-                <Button onClick={handleReset} variant="destructive" className="w-full">
-                  <RotateCcw className="h-4 w-4 mr-2" />
-                  Reset to Defaults
-                </Button>
-              </div>
-            </div>
-          </TabsContent>
+          
         </Tabs>
 
         <DialogFooter>
