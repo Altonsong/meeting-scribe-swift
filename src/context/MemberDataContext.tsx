@@ -8,6 +8,7 @@ interface MemberDataContextType {
   members: Member[];
   roles: string[];
   awards: string[];
+  dataVersion: number;
   setMembers: (members: Member[]) => void;
   setRoles: (roles: string[]) => void;
   setAwards: (awards: string[]) => void;
@@ -34,6 +35,8 @@ export const MemberDataProvider: React.FC<{ children: ReactNode }> = ({ children
     version: '1.0',
     lastUpdated: new Date().toISOString(),
   });
+  
+  const [dataVersion, setDataVersion] = React.useState(0);
 
   const setMembers = (members: Member[]) => {
     setStoredData({
@@ -41,6 +44,7 @@ export const MemberDataProvider: React.FC<{ children: ReactNode }> = ({ children
       members,
       lastUpdated: new Date().toISOString(),
     });
+    setDataVersion(prev => prev + 1);
   };
 
   const setRoles = (roles: string[]) => {
@@ -49,6 +53,7 @@ export const MemberDataProvider: React.FC<{ children: ReactNode }> = ({ children
       roles,
       lastUpdated: new Date().toISOString(),
     });
+    setDataVersion(prev => prev + 1);
   };
 
   const setAwards = (awards: string[]) => {
@@ -57,6 +62,7 @@ export const MemberDataProvider: React.FC<{ children: ReactNode }> = ({ children
       awards,
       lastUpdated: new Date().toISOString(),
     });
+    setDataVersion(prev => prev + 1);
   };
 
   const resetToDefaults = () => {
@@ -67,6 +73,7 @@ export const MemberDataProvider: React.FC<{ children: ReactNode }> = ({ children
       version: '1.0',
       lastUpdated: new Date().toISOString(),
     });
+    setDataVersion(prev => prev + 1);
   };
 
   const exportData = () => {
@@ -81,6 +88,7 @@ export const MemberDataProvider: React.FC<{ children: ReactNode }> = ({ children
           ...data,
           lastUpdated: new Date().toISOString(),
         });
+        setDataVersion(prev => prev + 1);
         return true;
       }
       return false;
@@ -96,6 +104,7 @@ export const MemberDataProvider: React.FC<{ children: ReactNode }> = ({ children
         members: storedData.members,
         roles: storedData.roles,
         awards: storedData.awards,
+        dataVersion,
         setMembers,
         setRoles,
         setAwards,

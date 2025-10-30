@@ -110,8 +110,6 @@ const MemberManagement = () => {
       title: "Changes saved",
       description: "All changes have been saved successfully.",
     });
-    // Reload the page to reflect changes
-    window.location.reload();
   };
 
   // Export data
@@ -141,8 +139,6 @@ const MemberManagement = () => {
         title: "Data imported",
         description: "Data has been imported successfully.",
       });
-      // Reload the page to reflect changes
-      window.location.reload();
     } else {
       toast({
         title: "Import failed",
@@ -161,8 +157,6 @@ const MemberManagement = () => {
         title: "Data reset",
         description: "All data has been reset to defaults.",
       });
-      // Reload the page to reflect changes
-      window.location.reload();
     }
   };
 
