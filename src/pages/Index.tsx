@@ -152,12 +152,18 @@ const IndexContent = () => {
   );
 };
 
+const IndexWithProviders = () => {
+  return (
+    <AttendanceProvider>
+      <IndexContent />
+    </AttendanceProvider>
+  );
+};
+
 const Index = () => {
   return (
     <MemberDataProvider>
-      <AttendanceProvider>
-        <IndexContent />
-      </AttendanceProvider>
+      <IndexWithProviders />
     </MemberDataProvider>
   );
 };
