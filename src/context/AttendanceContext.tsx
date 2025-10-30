@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { useMemberData } from './MemberDataContext';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface AttendanceContextType {
   attendeesList: string[];
@@ -10,16 +9,10 @@ const AttendanceContext = createContext<AttendanceContextType | undefined>(undef
 
 export const AttendanceProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [attendeesList, setAttendeesList] = useState<string[]>([]);
-  const { dataVersion } = useMemberData();
 
   const updateAttendeesList = (members: string[], guests: string[]) => {
     setAttendeesList([...members, ...guests]);
   };
-
-  // Force re-render when member data changes
-  useEffect(() => {
-    // This ensures the context is aware of member data changes
-  }, [dataVersion]);
 
   return (
     <AttendanceContext.Provider value={{ attendeesList, updateAttendeesList }}>
