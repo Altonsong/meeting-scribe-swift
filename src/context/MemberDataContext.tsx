@@ -39,29 +39,29 @@ export const MemberDataProvider: React.FC<{ children: ReactNode }> = ({ children
   const [dataVersion, setDataVersion] = React.useState(0);
 
   const setMembers = (members: Member[]) => {
-    setStoredData({
-      ...storedData,
+    setStoredData(prevData => ({
+      ...prevData,
       members,
       lastUpdated: new Date().toISOString(),
-    });
+    }));
     setDataVersion(prev => prev + 1);
   };
 
   const setRoles = (roles: string[]) => {
-    setStoredData({
-      ...storedData,
+    setStoredData(prevData => ({
+      ...prevData,
       roles,
       lastUpdated: new Date().toISOString(),
-    });
+    }));
     setDataVersion(prev => prev + 1);
   };
 
   const setAwards = (awards: string[]) => {
-    setStoredData({
-      ...storedData,
+    setStoredData(prevData => ({
+      ...prevData,
       awards,
       lastUpdated: new Date().toISOString(),
-    });
+    }));
     setDataVersion(prev => prev + 1);
   };
 
@@ -84,10 +84,10 @@ export const MemberDataProvider: React.FC<{ children: ReactNode }> = ({ children
     try {
       const data = JSON.parse(jsonString);
       if (data.members && data.roles && data.awards) {
-        setStoredData({
+        setStoredData(prevData => ({
           ...data,
           lastUpdated: new Date().toISOString(),
-        });
+        }));
         setDataVersion(prev => prev + 1);
         return true;
       }

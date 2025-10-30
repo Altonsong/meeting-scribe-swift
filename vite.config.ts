@@ -6,10 +6,10 @@ import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig(() => ({
   server: {
-    host: "::",
-    port: 8080,
+    host: "0.0.0.0",
+    port: 5000,
   },
-  base: "./", // Set base to relative path for GitHub Pages
+  base: "./",
   plugins: [react()],
   resolve: {
     alias: {
