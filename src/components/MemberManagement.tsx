@@ -110,6 +110,8 @@ const MemberManagement = () => {
       title: "Changes saved",
       description: "All changes have been saved successfully.",
     });
+    // Reload the page to reflect changes
+    window.location.reload();
   };
 
   // Export data
