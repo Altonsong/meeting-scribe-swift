@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import { useAttendance } from '@/context/AttendanceContext';
+import { useMemberData } from '@/context/MemberDataContext';
+import { useEffect } from 'react';
 
 interface AwardsSectionProps {
   awards: string[];
@@ -26,6 +28,12 @@ const AwardsSection = ({
   setAwardRecipients
 }: AwardsSectionProps) => {
   const { attendeesList } = useAttendance();
+  const { dataVersion } = useMemberData();
+  
+  // Force component to re-render when data changes
+  useEffect(() => {
+    // This will trigger re-render when dataVersion changes
+  }, [dataVersion]);
   
   const allPeople = attendeesList.length > 0
     ? attendeesList

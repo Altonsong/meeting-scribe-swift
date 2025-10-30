@@ -15,7 +15,7 @@ import { AttendanceProvider } from "@/context/AttendanceContext";
 import { MemberDataProvider, useMemberData } from "@/context/MemberDataContext";
 
 const IndexContent = () => {
-  const { members, roles, awards } = useMemberData();
+  const { members, roles, awards, dataVersion } = useMemberData();
 
   // Meeting Basic Info
   const [meetingDate, setMeetingDate] = useState<string>("");
@@ -150,11 +150,11 @@ const IndexContent = () => {
 
 const Index = () => {
   return (
-    <MemberDataProvider>
-      <AttendanceProvider>
+    <AttendanceProvider>
+      <MemberDataProvider>
         <IndexContent />
-      </AttendanceProvider>
-    </MemberDataProvider>
+      </MemberDataProvider>
+    </AttendanceProvider>
   );
 };
 
