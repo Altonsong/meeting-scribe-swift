@@ -53,6 +53,11 @@ const IndexContent = () => {
     { id: "group-eval", name: "Group Evaluation", role: "Group", joined: "" },
   ];
 
+  // Filter out deleted members from selectedMembers
+  const filteredSelectedMembers = selectedMembers.filter(memberId =>
+    members.some(member => member.id === memberId)
+  );
+
   return (
       <div className="min-h-screen bg-gray-50 py-4 px-3 sm:py-6 sm:px-4">
         <div className="max-w-4xl mx-auto">
@@ -78,8 +83,7 @@ const IndexContent = () => {
           />
 
           <AttendanceSection
-            members={members}
-            selectedMembers={selectedMembers}
+            selectedMembers={filteredSelectedMembers}
             setSelectedMembers={setSelectedMembers}
             guests={guests}
             setGuests={setGuests}
@@ -124,7 +128,7 @@ const IndexContent = () => {
             theme={theme}
             startTime={startTime}
             chairperson={chairperson}
-            selectedMembers={selectedMembers}
+            selectedMembers={filteredSelectedMembers}
             guests={guests}
             roleAssignments={roleAssignments}
             wordOfWeek={wordOfWeek}
