@@ -1,5 +1,5 @@
-
-import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useMemberData } from './MemberDataContext';
 
 interface AttendanceContextType {
   attendeesList: string[];
@@ -8,13 +8,18 @@ interface AttendanceContextType {
 
 const AttendanceContext = createContext<AttendanceContextType | undefined>(undefined);
 
-export const AttendanceProvider: React.FC<{children: ReactNode}> = ({ children }) => {
+export const AttendanceProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [attendeesList, setAttendeesList] = useState<string[]>([]);
+  const { dataVersion } = useMemberData();
 
   const updateAttendeesList = (members: string[], guests: string[]) => {
-    const combinedList = [...members, ...guests];
-    setAttendeesList(combinedList);
+    setAttendeesList([...members, ...guests]);
   };
+
+  // Force re-render when member data changes
+  useEffect(() => {
+    // This ensures the context is aware of member data changes
+  }, [dataVersion]);
 
   return (
     <AttendanceContext.Provider value={{ attendeesList, updateAttendeesList }}>
@@ -23,7 +28,7 @@ export const AttendanceProvider: React.FC<{children: ReactNode}> = ({ children }
   );
 };
 
-export const useAttendance = (): AttendanceContextType => {
+export const useAttendance = () => {
   const context = useContext(AttendanceContext);
   if (context === undefined) {
     throw new Error('useAttendance must be used within an AttendanceProvider');

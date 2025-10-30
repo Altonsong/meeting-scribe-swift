@@ -154,11 +154,11 @@ const IndexContent = () => {
 
 const Index = () => {
   return (
-    <AttendanceProvider>
-      <MemberDataProvider>
+    <MemberDataProvider>
+      <AttendanceProvider>
         <IndexContent />
-      </MemberDataProvider>
-    </AttendanceProvider>
+      </AttendanceProvider>
+    </MemberDataProvider>
   );
 };
 
