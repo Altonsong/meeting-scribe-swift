@@ -63,8 +63,8 @@ const IndexContent = () => {
   ];
 
   // Filter out deleted members from selectedMembers
-  const filteredSelectedMembers = selectedMembers.filter(memberId =>
-    sortedMembers.some(member => member.id === memberId)
+  const filteredSelectedMembers = selectedMembers.filter(memberName =>
+    sortedMembers.some(member => member.name === memberName)
   );
 
   return (
