@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   FormSection,
   MeetingBasicInfo,
@@ -16,6 +16,15 @@ import { MemberDataProvider, useMemberData } from "@/context/MemberDataContext";
 
 const IndexContent = () => {
   const { members, roles, awards, dataVersion } = useMemberData();
+
+  // Sort members by first name alphabetically
+  const sortedMembers = useMemo(() => {
+    return [...members].sort((a, b) => {
+      const firstNameA = a.name.split(' ')[0].toLowerCase();
+      const firstNameB = b.name.split(' ')[0].toLowerCase();
+      return firstNameA.localeCompare(firstNameB);
+    });
+  }, [members]);
 
   // Meeting Basic Info
   const [meetingDate, setMeetingDate] = useState<string>("");
@@ -49,13 +58,13 @@ const IndexContent = () => {
 
   // Add "Group Evaluation" to members list for speech evaluators
   const membersWithGroupEval = [
-    ...members,
+    ...sortedMembers,
     { id: "group-eval", name: "Group Evaluation", role: "Group", joined: "" },
   ];
 
   // Filter out deleted members from selectedMembers
   const filteredSelectedMembers = selectedMembers.filter(memberId =>
-    members.some(member => member.id === memberId)
+    sortedMembers.some(member => member.id === memberId)
   );
 
   return (
@@ -79,7 +88,7 @@ const IndexContent = () => {
             setStartTime={setStartTime}
             chairperson={chairperson}
             setChairperson={setChairperson}
-            members={members}
+            members={sortedMembers}
           />
 
           <AttendanceSection
@@ -90,7 +99,7 @@ const IndexContent = () => {
           />
 
           <RolesSection
-            members={members}
+            members={sortedMembers}
             roles={roles}
             roleAssignments={roleAssignments}
             setRoleAssignments={setRoleAssignments}
@@ -117,7 +126,7 @@ const IndexContent = () => {
 
           <AwardsSection
             awards={awards}
-            members={members}
+            members={sortedMembers}
             guests={guests}
             awardRecipients={awardRecipients}
             setAwardRecipients={setAwardRecipients}
